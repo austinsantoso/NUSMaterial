@@ -1,6 +1,6 @@
 # NUSMaterial
 There are the reference sheets which I made to survive NUS.
-Most of these file either summaries or cheat sheets.
+These files are not necessarily cheat sheets, rather summaries.
 
 I usually squeeze the pages together to make the cheat sheet(to a reasonable extent XD) or take what I feel necessary.
 
