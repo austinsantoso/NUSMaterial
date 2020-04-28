@@ -2,8 +2,6 @@
 There are the reference sheets which I made to survive NUS.
 Most of these file either summaries or cheat sheets.
 
-I usually squeeze the pages together to make the cheat sheet(to a reasonable extent XD) or take what I feel necessary.
-
 Feel free to use them, or adjust to your needs.
 
 ***
@@ -15,3 +13,4 @@ Modules Available:
 | CS2100     | Computer Organisation | 19/20 S1 | [here](./CS2100 - Computer Organisation)|
 | ST2334     | Probability and Statistics | 19/20 S1 | [here](./ST2334 - Probability and Statistics)|
 | CS3244     | Machine Learning | 19/20 S2 | [here](./CS3244 - Machine Learning)|
+
