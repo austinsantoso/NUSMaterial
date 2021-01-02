@@ -58,7 +58,7 @@ Each column can only accept the same type.
 
 ## Key
 
-![Superkey](images/L1-superkey.png)
+![Superkey](./images/L1-superkey.png)
 
 > _Superkey_ (definition 2.1.3): is a set of attributes that can uniquely identify rows in the relation instance.  
 > All super sets of a superkey are also superkeys.
