@@ -58,7 +58,7 @@ Each column can only accept the same type.
 
 ## Key
 
-![Superkey](./images/L1-superkey.png)
+![Superkey](/images/L1-superkey.png)
 
 > _Superkey_ (definition 2.1.3): is a set of attributes that can uniquely identify rows in the relation instance.  
 > All super sets of a superkey are also superkeys.
@@ -74,7 +74,8 @@ Given a table, if I give you a row with one field filled, can I get the remainin
 From the example above, given a color it cannot identify the rest.
 We can be given both Color and Eye Color, we can identify the rest.
 
-_SuperKey_ is just the identity. a set of columns, that when given the values of these columns, we can uniquely identify the remaining columns.
+_SuperKey_ i
+s just the identity. a set of columns, that when given the values of these columns, we can uniquely identify the remaining columns.
 There is at least one SuperKey, which contains every column.
 $\{col1, col2, ...\}$
 
