@@ -318,6 +318,7 @@ We also use GLUT (OpenGL Utility Tooklit), which is not part of OpenGL. It provi
 - Event-driven
 
 OpenGL is responsible for the grey box, the pipeline. Generate image then place to frame buffer.
+
 ![opengl resposibility](./images/l2-openglresponsibility.png)
 
 OpenGL has functions for:
@@ -358,6 +359,7 @@ There are two types of functions:
   - Attribute functions
 
 Basic syntax for openGL
+
 ![openglimage](./images/l2-openglformat.png)
 
 - u: Unsigned
@@ -523,7 +525,8 @@ or when the primitives are already sent to the rendering pipeline in a back to f
 - imagine having millions of vertices and objects
 - Uses GLUT depth
 - Not always possible, if there are interlocking rings:
-  ![interlocking rings](./images/l3-interlocikingrings.png)
+
+![interlocking rings](./images/l3-interlocikingrings.png)
 
 # Lecture 3
 
@@ -555,8 +558,9 @@ When triggered, input devices return information (their measure) to the system
 In GLUT, there is an event loop.
 In the event loop waiting for an event to come in, to the event queue, and call corresponding event callback functions.
 if no callback is defined for the event, the event is ignored.
-![event loop](./images/l3-eventqueue.png)
 The program is constantly checking event queue.
+
+![event loop](./images/l3-eventqueue.png)
 
 Some common event types:
 
@@ -734,6 +738,7 @@ These vertices are later needed to be represented in the world frame, where we p
 Eventually we represent entities in the camera frame by changing the object representation using the model-view matrix. This can move if camera moves.
 
 Initially all the frames are the same frame.
+
 ![OpenGL Geometric Transformations](./images/l4-OpenGLGeometricTransformations.png)
 
 These are the calculations done to convert the 3d vertex to become pixel coordinates(windows coordinate) to do rasterization.
@@ -818,7 +823,7 @@ $$
 To rotate upon any arbitrary axis
 We can use concatenation to combine rotation on multiple axis.
 $R(\theta)=R_z(\theta_z)R_y(\theta_y)R_x(\theta_x)$
-where $\theta_x, \there_y, \theta_z$ are called Euler Angles. This does commute, not commutative.
+where $\theta_x, \theta_y, \theta_z$ are called Euler Angles. This does commute, not commutative.
 
 ## Scaling
 
@@ -1043,6 +1048,7 @@ This is because if we think about it, when we move the camera closer to the obje
 The red is the camera frame.
 
 How do we derive the transformation matrix?
+
 ![Deriving View Transformation Matrix](./images/l5-derivingciewtranformationmatrix.png)
 
 The normal vectors also need to be transformed.
@@ -1441,6 +1447,7 @@ there are only two candidates for the next pixel to be written into the frame bu
 To determine which pixel gets turned on, we determine using the distance of line to the center of points.
 Using a Decision variable $d$.
 ![decision variable](./images/l6-decision-variable.png)
+
 $\Delta x$ is the distance between two end points. when multiplied with $(a-b)$, will always result in integer.
 
 We can further optimize it if we look at $d_k$, the value of the decision variable at $x=k$
@@ -1550,6 +1557,7 @@ This formula is the Illumination model
 - Compute color at surface point using
 
 ![phongequation](./images/l8-phong-complete.png)
+
 The equation returns a RGB triplet.
 
 - $I_{\text{phong}}$ = final resultant intensity (RGB triplet)
