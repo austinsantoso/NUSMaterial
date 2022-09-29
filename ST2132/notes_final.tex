@@ -1,0 +1,262 @@
+\documentclass{article}
+
+% Code syntax highlighting
+% https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted
+\usepackage{minted}
+\usemintedstyle{borland}
+
+% If you're new to LaTeX, here's some short tutorials:
+% https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+% https://en.wikibooks.org/wiki/LaTeX/Basics
+
+% Formatting
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, margin=0.5in]{geometry}
+\usepackage[titletoc,title]{appendix}
+\usepackage{indentfirst}
+
+% Math
+% https://www.overleaf.com/learn/latex/Mathematical_expressions
+% https://en.wikibooks.org/wiki/LaTeX/Mathematics
+\usepackage{amsmath,amsfonts,amssymb,mathtools}
+\DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
+
+
+% Images
+% https://www.overleaf.com/learn/latex/Inserting_Images
+% https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+\usepackage{graphicx,float}
+%Path relative to the main .tex file 
+\graphicspath{ {./images/} }
+
+% Tables
+% https://www.overleaf.com/learn/latex/Tables
+% https://en.wikibooks.org/wiki/LaTeX/Tables
+
+% Algorithms
+% https://www.overleaf.com/learn/latex/algorithms
+% https://en.wikibooks.org/wiki/LaTeX/Algorithms
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+
+
+% Sections in a new page
+% \usepackage{titlesec}
+% \newcommand{\sectionbreak}{\clearpage}
+% \newcommand{\subsectionbreak}{\clearpage}
+
+\usepackage{hyperref}
+
+\usepackage{multicol}
+\usepackage{color}
+\setlength{\columnseprule}{1pt}
+\usepackage{blindtext}
+\usepackage{tabularx}
+
+\begin{document}
+\begin{multicols*}{3}
+    \section{Chapter 4}
+    \subsection{Moment Generating Function}
+    The Moment-generating function of a random variable $X$ is $M\left( t \right) = E \left[ e^{tX} \right]$
+
+    \begin{tabularx}{0.9\columnwidth} {
+            | >{\raggedright\arraybackslash}X
+            | >{\raggedleft\arraybackslash}X |}
+        \hline
+        Distribution                    & mfg                                                                                \\
+        \hline
+        Bernouli Random Variable        & $pe^t + \left(1-p\right)$                                                          \\
+        \hline
+        Binomial Distribution           & $\left(pe^t + 1 - p\right)^n$                                                      \\
+        \hline
+        Geometric Distribution          & $pe^t \frac{1}{1-e^t\left(1-p\right)}$ if $e^t\left(1-p\right) < 1$                \\
+        \hline
+        Negative Geometric Distribution & $\frac{p^r}{\left[ 1-\left(1-p\right)e^t \right]^r}$ if $t<-\log \left(1-p\right)$ \\
+        \hline
+        Poisson distirbution            & $e^{\lambda \left(e^t - 1\right)}$                                                 \\
+        \hline
+        Uniform Distribution            & $\frac{e^{tb}-e^{ta}}{t\left( b - a\right)}$                                       \\
+        \hline
+        Exponential Distribution        & $\frac{\lambda}{\lambda-t}$                                                        \\
+        \hline
+        Gamma Distribution              & $\left(\frac{\lambda}{\lambda-t}\right)^\alpha$                                    \\
+        \hline
+        Normal DIstribution             & $e^{\mu t + \sigma^2 t^2 / 2}$                                                     \\
+        \hline
+    \end{tabularx}
+
+    Note: $M^{\left( r \right)} \left( 0 \right)= E\left(X^r\right)$, $E(x) = M^\prime(0)$ and
+    $Var(x) = M^{\prime \prime}(0)$
+
+    if $X$ has mgf $M_X\left( t \right)$ and $Y=a+bX$, then $Y$ has mgf $M_Y\left(t\right) = e^{at} M_X\left( at \right)$
+
+    if $X$ has mgf $M_X\left( t \right)$ and $Y$ has mgf $M_Y\left( t \right)$ and $Z=X+Y$, then $Z$ has mgf $M_Z\left(t\right) = M_X\left(t\right) M_Y\left(t\right)$
+
+    \subsection{4.6 approximation}
+    We can approximate a funciton of a an unknown distribution as follows. We don't know $X$ but we know $g$
+    \begin{itemize}
+        \item $Y = g\left( X \right) \approx g\left( \mu_X \right) + \left( X -\mu_X \right) g^\prime \left( \mu_X\right)$
+        \item $\mu_Y \approx g\left( \mu_X \right)$
+        \item $\sigma_Y^2 \approx \sigma_X^2 \left[ g^\prime \left( \mu_X\right) \right]^2$
+        \item $Y = g\left( X \right) \approx g\left( \mu_X \right) + \left( X -\mu_X \right) g^\prime \left( \mu_X\right) + \frac{1}{2} \left(X - \mu_X \right)^2g^{\prime \prime} \left(\mu_X\right)$
+        \item $\mu_Y \approx g\left( \mu_X \right)+ \frac{1}{2} \sigma_X^2g^{\prime \prime} \left(\mu_X\right)$
+    \end{itemize}
+
+    \section{Chap 5}
+    If we sample $n$ independent points $X_1, X_2, \dots X_n$ from the same distribution as $X$.
+    $S_n = \Sigma_{i=1}^n X_i$ as $n\rightarrow \infty$, $\frac{S_n}{n} \rightarrow E\left( X \right)$
+
+    Law of Large Numbers: Let $X_1, X_2, \dots$ be a sequence of independent random vairables with $E\left(X_i\right) = \mu$ and $Var\left(X_i\right) = \sigma^2$
+    Let $\bar{X}_n = n^{-1}\Sigma_{i=1}^nX_i$ then for any $\epsilon > 0$, $P\left( \vert \bar{X}_n - \mu\vert > \epsilon \right) \rightarrow 0$ as $n \rightarrow 0$
+
+    $E\left(\bar{X}_n\right) = \frac{1}{n} \Sigma_{i=1}^n E\left(X_i\right) = \mu$ and due do independence $Var\left( \bar{X}_n \right) = \frac{1}{n^2} \Sigma_{i=1}^n Var(X_i) = \frac{\sigma^2}{n}$
+
+    From Chebyshev's inequality
+    $P\left( \vert \bar{X}_n - \mu\vert > \epsilon \right) \leq \frac{var \left(\bar{X}_n\right)}{\epsilon^2} = \frac{\sigma^2}{n \epsilon^2} \rightarrow 0$ as $n \rightarrow 0$
+
+    Monte Carlo Integration
+    if we want $E\left[f\left(X \right)\right] = \int_0^1 f\left( x \right) dx = I\left( f \right)$
+    But we cannot integrate, we can generate random variables $X_1, X_2, \dots$ from $[0, 1]$ and compute $\hat{I}\left( f \right) = \frac{1}{n} \Sigma_{i=1}^n f\left(X_i\right)$
+    Essentially, sample a lot of points, will converge to true mean.
+
+    \section{Chapter 6}
+    If $Z$ is a standard normal random variable, the distribution of $U=Z^2$ is called the chi-square distribution with 1 degree of freedom.
+
+    If $U_1, U_2, \dots$ are independent chi-square random variables with 1 degree of freedom,
+    the distribution of $V=U_1 +  U_2 + \dots + U_n$ is called the chi-square distribution
+    with $n$ degrees of freedom and is denoted by $\chi_n^2$
+
+    Chi-square distribution of $n$ degrees of freedom is a gamma distribution with $\alpha = n/2$ and $\lambda = \frac{1}{2}$
+    $f\left( v \right) = \frac{1}{2^{n/2}\Gamma\left(n/2\right)} v^{\left(n/2\right)-1}e^{-v/2}$, $v \geq 0$
+    With MGF $M\left( t t\right) = \left( 1-2t \right)^{-n/2}$ with $E\left(V\right)=n$ and $Var\left( V \right) = 2n$
+
+    If $U ~\chi^2_n$ and $V~\chi^2_m$ then $U+V ~ \chi^2_{m+n}$
+
+    If $Z~N(0, 1)$ and $U~\chi^2_n$ and $Z$ and $U$ are independent. The distribution of $Z/\sqrt{U/n}$ is called the $t$ distribution with $n$ degrees of freedom.
+
+    The density function of $t$ distribution with $n$ degrees of freedom is:
+    $f\left( t \right) = \frac{\Gamma\left[ \left( n+1 \right)/2 \right]}{\sqrt{n \pi} \Gamma\left(n/2\right)} \left( 1 + \frac{t^2 }{n}\right)^{-\left(n+1\right)/2}$
+
+    $f(t) = f(-t)$ as the number of degree of freedom increases, it approaches the normal distribution.
+
+    Cauchy distribution: $f_y(y) = \frac{1}{\pi} \left(\frac{1}{1 + y^2}\right)$
+
+    Let $U$ and $V$ be independent chi-square random variables with $m$ and $n$ degrees of freedom, respectively.
+    The distribution of $W = \frac{U/m}{V/n}$ if called the $F$ distribution with $m$ and $n$ degrees of freedom denoted by $F_{m,n}$
+
+    The density function of $W$ is given by $f\left( w \right) = \frac{\Gamma \left[ \left( m + n\right)/2 \right]}{\Gamma \left( m/2 \right) \Gamma\left( n/2 \right)} \left(\frac{m}{n}\right)^{m/2} w^{m/2 - 1} \left( 1 + \frac{m}{n}w \right)^{-\left(m_n\right)/2}$
+    if $w \geq 0$
+
+    \subsection{Sample Mean and Sample Variance}
+    If we sample froma a normal distribution $X_1, \dots X_n$
+    The sample mean $\bar{X} = \frac{1}{n}\Sigma_{i=1}^nX_i$.
+    The sample variance $S^2 = \frac{1}{n-1}\Sigma_{i=1}^n\left(X_i - \bar{X}\right)^2$.
+    Because $\bar{X}$ is a linear combination of independent normal ranodm variables, it is normally distributed with
+    $E\left(\bar{X}\right) = \mu$ and $Var\left(\bar{X}\right) = \frac{\sigma^2}{n}$
+
+    The distribution of $\frac{\left(n-1\right)S^2}{\sigma^2}$ is the chi-square distribution with $n-1$ degrees of freedom.
+
+    Let $\bar{X}$ and $S^2$ be aas given at the begining of this section. Then $\frac{\bar{X} - \mu}{S / \sqrt{n}} ~t_{n-1}$
+
+    \section{Chapter 8}
+    Method of moments:
+    Let $\mu_k= E\left( X^k \right)$ be the k-th moment.
+    The estimate of the k-th moment $\hat{\mu}_k = \frac{1}{n} \Sigma_{i-1}^nX_i^k$
+
+    Suppose we want to estimate parameters $\theta$, that has expression $\theta = f\left( \mu_1 \right)$,
+    a function of the mean.
+    We can estimate using sample mean $\hat{\theta} = f\left(\hat{\mu_1}\right)$
+
+    MLE = Maximum likelyhood estimate.
+    we find the probability that the data actually happends, given our estimate.
+    $lik\left(\theta\right)  = \prod_{i=1}^n f \left( X_i | \theta \right)$
+    It is easier to calculate the log, $l\left( \theta \right) \Sigma_{i=1}^n \log \left[ f\left( X_i | \theta \right) \right]$
+    To minimize mle, $l^\prime \left(\theta\right) = 0$
+
+
+    \begin{tabularx}{0.9\columnwidth} {
+            | >{\raggedright\arraybackslash}X
+            | >{\raggedleft\arraybackslash}X |}
+        \hline
+        Distribution        & mle                                                                                                                          \\
+        \hline
+        Poisson             & $\hat{\lambda} = \bar{X}$                                                                                                    \\
+        \hline
+        Normal Distribution & $\hat{\mu} = \bar{X}$ and $\hat{\sigma} = \sqrt{\frac{1}{n} \Sigma_{i=1}^n \left( X_i - \bar{X} \right)^2}$  or $\sigma = S$ \\
+        \hline
+        Gamma Distribution  & $\hat{\lambda} = \frac{n \hat{\alpha}}{\Sigma_{i=1}^n X_i} = \frac{\hat{\alpha}}{\bar{X}}$                                   \\
+        \hline
+    \end{tabularx}
+
+    Theorem Invariance Properto of MLE:
+    Let $\hat{\theta} = \left( \hat{\theta_1}, \dots \hat{\theta_k} \right)$ be a mle of $\theta = \left( \theta_1, \dots, \theta_k \right)$
+    in the density of $f\left( x | \theta_1, \dots, \theta_k \right)$.
+    If $T\left( \theta \right) = \left( T_1\left( \theta \right) \right), \dots, T_r \left( \theta \right)$ where $1 \leq r \leq k$ is a transfomrtaion
+    of the parameter space $\theta$ then a mle of $T \left( \theta  \right)$ is $T\left(\hat{\theta}\right) = \left( T_1\left( \hat{\theta} \right), \dots, T_r\left( \hat{\theta} \right) \right)$
+
+    $I\left(\theta\right) = E \left[ \frac{\partial}{\partial \theta} \log f\left( X|\theta \right)\right]^2$
+    Under appropiate smoothness conditions on $f$, $I\left( \theta \right) = -E \left[ \frac{\partial^2}{\partial\theta^2} \log f \left( X |\theta \right)\right]$
+
+    The large sample distribution of a maximum likelihood estimate is approximately normal with mean $\theta_0$ and variance $1/\left[ nI\left( \theta_0 \right) \right]$
+
+    Under smoothnesss conditions on $f$, the probability distributions of $\sqrt{n I \left( \theta_0 \right)} \left( \hat{\theta} - \theta_0 \right)$
+    tends to a standard normal distribution.
+
+    Bayesian Approach to Parameter Estimation.
+    $f_{X,\Theta} \left( x, \theta \right) = f_{X|\Theta}\left( x|\theta \right)f_\Theta\left( \theta \right)$
+    And the marginal distribution of $X$ is $f_X\left( x \right) = \int f_{X,\Theta}\left( x, \theta \right) d\theta = \int f_{X|\Theta} \left( x|\theta \right) f_\Theta \left( \theta \right)d \theta$
+    bayesian rule: $f_{\Theta | X}\left( \theta | x \right) = \frac{f_{X,\Theta} \left(x, \theta\right)}{f_X\left( x \right)} = \frac{f_{X|\Theta} \left( x|\theta \right) f_\Theta \left( \theta \right)}{\int f_{X|\Theta} \left( x|\theta \right) f_\Theta \left( \theta \right)d \theta}$
+
+    posterios density = likelihood $\times$ prior density
+
+    $f_{\Theta | X}\left( \theta | x \right) = f_{X|\Theta}\left( x | \theta \right) \times f_\Theta \left( \theta \right)$
+
+    Mean Square Error $MSE\left( \hat{\theta} \right) = E\left( \hat{\theta} - \theta_0 \right)^2 = Var\left( \hat{\theta} \right) + \left( E\left( \hat{\theta}\right) - \theta_0 \right)^2 $
+
+    Given 2 estimates $\hat{\theta}$ and $\tilde{\theta}$ the efficiency of $\hat{\theta}$ over $\tilde{\theta}$ is
+    $eff\left( \hat{\theta}, \tilde{\theta}  \right) = \frac{Var \left( \tilde{\theta} \right)}{Var \left( \hat{\theta} \right)}$
+
+    Cramer-Rao Inequality: Let $X_1, \dots, X_n$ be i.i.d. with density function of $f\left( x|\theta \right)$ Let $T=t\left( X_1, \dots, X_n \right)$ be an unbiased estimate of $\theta$ Then under smoothness assumption of $f\left(x|\theta\right)$
+    $Var\left( T \right) \geq \frac{1}{n I\left( \theta \right)}$
+
+    A statistic $T(X_1, \dots, X_n)$ is said to be sufficient for $\theta$ if the conditional distribution of $X_1, \dots X_n$ given $T=t$
+    Sufficient means does not depend on $\theta$ for any value of $t$.
+
+    A necessary and suficient condition for $T(X_1, \dots, X_n)$ to be sufficient for a parameter $\theta$,
+    is that the joint probability function factors in the form $f\left( x1, \dots x_n | \theta \right) =g \left[ T\left( x_1, \dots, x_n \right), \theta \right] h\left( x_1, \dots, x_n \right)$
+
+    if $T$ is sufficient for $\theta$, the maximum likelihood estimate is a function of $T$
+
+    Rao-Blackwell Theorem:
+    Let $\hat{\theta}$ be an estimator of $\theta$ with $E\left( \hat{\theta}^2\right) < \infty$ for all $\theta$.
+    Suppose that $T$ is sufficient for $\theta$ and let $\tilde{\theta} = E\left( \hat{\theta} |T \right)$.
+    Then, for all $\theta$
+    $E\left( \tilde{\theta} - \theta \right)^2 \leq E\left( \hat{\theta} - \theta \right)^2$.
+    unless $\hat{\theta} = \tilde{\theta}$
+
+    \section{Chapter 6}
+    \begin{itemize}
+        \item Rejecting $H_0$, null hypothesis, when it is true is called a \textbf{type I error}
+        \item The probability of a type I error is called the \textbf{significance level} of the test and is denoted by $\alpha$
+        \item Accepting the null hypothesis when it is false is called a \textbf{type II error} and its probability is usually denoetd $\beta$
+        \item The probability that the null hypothesis is rejected when it is false is called the \textbf{power} of the test, and equals to $1-\beta$
+        \item We have seen in this example how rejecting $H_0$ when the likelihood ratio is less than a constant $c$ is equivalent to rejecting when the number of heads is greater than some value $x_0$. The likelihood ratio, or equivalently, the number of heads is called the \textbf{test statistics}.
+        \item The set of values of the test statistics taht leads to rejection of the null hypoithesis is called the \textbf{rejection region}, and the set of values that leads to acceptance is called the \textbf{acceptance region}
+        \item The probability distribution of the test statistic when the null hypothesis is true is called the \textbf{null distribution}
+    \end{itemize}
+
+    Simple hypothesis is when the null and alternative hypothesis each completely specify the probability distribution.
+
+    Neyman-Pearson Lemma:
+    Suppose that $H_0$ and $H_1$ are simple hypotheses and that the test that rejects $H_0$ whenever the likelihood ratio is less that $c$ has significance level $\alpha$.
+    Then any other test for which the siginificance level is less than or equal to $\alpha$ has power less than or equal to that of the likelihood ratio test.
+
+    Generalized likelihood ratio:
+    $A^* = \frac{\max_{\theta\in \omega_0} lik\left( \theta \right)}{\max_{\theta\in \omega_1} lik\left( \theta \right)}$
+
+    Variance stabilizing transformation. propose a function $Y=f \left( X \right)$ that makes the variance a constant.
+    $Var\left( Y \right) \approx  \sigma^2 \left( mu \right) \left[ f^\prime \left( \mu \right) \right]^2$
+\end{multicols*}
+
+
+\end{document}
